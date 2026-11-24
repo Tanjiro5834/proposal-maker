@@ -251,48 +251,72 @@
     // 6. About Me
     const aboutText = applyPlaceholders(fields.about.value).trim();
     if (aboutText) {
-      htmlParts.push(`<h3 class="letter-heading">About Me</h3>`);
-      htmlParts.push(`<p class="letter-paragraph">${escapeHtml(aboutText)}</p>`);
+      htmlParts.push(
+        `<section class="letter-section">` +
+          `<h3 class="letter-heading">About Me</h3>` +
+          `<p class="letter-paragraph">${escapeHtml(aboutText)}</p>` +
+        `</section>`
+      );
     }
 
     // 7. Services Offered
     const serviceLines = parseLines(fields.services.value);
     if (serviceLines.length > 0) {
-      htmlParts.push(`<h3 class="letter-heading">Services Offered</h3>`);
-      htmlParts.push(renderBullets(serviceLines, false));
+      htmlParts.push(
+        `<section class="letter-section">` +
+          `<h3 class="letter-heading">Services Offered</h3>` +
+          `${renderBullets(serviceLines, false)}` +
+        `</section>`
+      );
     }
 
     // 8. Why Work With Me
     const whyLines = parseLines(fields.why.value);
     if (whyLines.length > 0) {
-      htmlParts.push(`<h3 class="letter-heading">Why Work With Me</h3>`);
-      htmlParts.push(renderBullets(whyLines, true));
+      htmlParts.push(
+        `<section class="letter-section">` +
+          `<h3 class="letter-heading">Why Work With Me</h3>` +
+          `${renderBullets(whyLines, true)}` +
+        `</section>`
+      );
     }
 
     // 9. Proposed Terms
     const termLines = parseLines(fields.terms.value);
     if (termLines.length > 0) {
-      htmlParts.push(`<h3 class="letter-heading">Proposed Terms</h3>`);
-      htmlParts.push(renderBullets(termLines, false));
+      htmlParts.push(
+        `<section class="letter-section">` +
+          `<h3 class="letter-heading">Proposed Terms</h3>` +
+          `${renderBullets(termLines, false)}` +
+        `</section>`
+      );
     }
 
     // 10. Next Step
     const nextStepText = applyPlaceholders(fields.nextStep.value).trim();
     if (nextStepText) {
-      htmlParts.push(`<h3 class="letter-heading">Next Step</h3>`);
-      htmlParts.push(`<p class="letter-paragraph">${escapeHtml(nextStepText)}</p>`);
+      htmlParts.push(
+        `<section class="letter-section">` +
+          `<h3 class="letter-heading">Next Step</h3>` +
+          `<p class="letter-paragraph">${escapeHtml(nextStepText)}</p>` +
+        `</section>`
+      );
     }
 
-    // 11. Closing Line
+    // 11 & 12. Closing + Signature Block (kept together as one unit)
     const closingText = applyPlaceholders(fields.closing.value).trim();
-    if (closingText) {
-      htmlParts.push(`<p class="letter-closing">${escapeHtml(closingText)}</p>`);
-    }
-
-    // 12. Signature Block
     const signatureText = applyPlaceholders(fields.signature.value).trim();
-    if (signatureText) {
-      htmlParts.push(`<div class="letter-signature">${escapeHtml(signatureText)}</div>`);
+    if (closingText || signatureText) {
+      const closingHtml = closingText
+        ? `<p class="letter-closing">${escapeHtml(closingText)}</p>`
+        : "";
+      const signatureHtml = signatureText
+        ? `<div class="letter-signature">${escapeHtml(signatureText)}</div>`
+        : "";
+
+      htmlParts.push(
+        `<section class="letter-section">${closingHtml}${signatureHtml}</section>`
+      );
     }
 
     letterPage.innerHTML = htmlParts.join("");

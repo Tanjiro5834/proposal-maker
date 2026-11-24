@@ -564,9 +564,11 @@ textarea:focus {
     display: none !important;
   }
 
+  html,
   body {
     background: #ffffff !important;
     height: auto !important;
+    min-height: 0 !important;
     overflow: visible !important;
     display: block !important;
   }
@@ -574,6 +576,7 @@ textarea:focus {
   .app-workspace,
   .preview-panel {
     display: block !important;
+    height: auto !important;
     padding: 0 !important;
     margin: 0 !important;
     background: #ffffff !important;
@@ -581,12 +584,34 @@ textarea:focus {
   }
 
   .letter-page {
+    display: block !important;
     width: 100% !important;
-    min-height: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
     box-shadow: none !important;
+    overflow: visible !important;
     font-size: 11pt !important;
     color: #000000 !important;
+  }
+
+  .letter-section {
+    display: block !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .letter-section h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .letter-section li,
+  .letter-section p {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    orphans: 3;
+    widows: 3;
   }
 }
