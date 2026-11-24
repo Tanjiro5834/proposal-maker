@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposal Letter Maker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header no-print">
+    <div class="header-brand">
+      <h1>Proposal Letter Maker</h1>
+      <span class="badge">Bulk School Edition</span>
+    </div>
+    <div class="header-actions">
+      <button type="button" id="btn-copy" class="btn btn-secondary">Copy as Plain Text</button>
+      <button type="button" id="btn-print" class="btn btn-primary">Print / Save as PDF</button>
+    </div>
+  </header>
+
+  <nav class="mobile-tabs no-print" aria-label="View Switcher">
+    <button type="button" id="tab-edit" class="tab-btn active" aria-pressed="true">Edit</button>
+    <button type="button" id="tab-preview" class="tab-btn" aria-pressed="false">Preview</button>
+  </nav>
+
+  <main class="app-workspace">
+    <!-- LEFT PANEL: EDITOR -->
+    <aside id="editor-panel" class="editor-panel no-print" aria-label="Letter Editor">
+      
+      <!-- SECTION 1: RECIPIENT -->
+      <section class="editor-section">
+        <div class="section-header">
+          <h2>1. Recipient Details</h2>
+          <div class="section-actions">
+            <button type="button" id="btn-save-school" class="btn btn-small btn-outline">Save This School</button>
+            <button type="button" id="btn-clear-recipient" class="btn btn-small btn-ghost">Clear Recipient</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="input-date">Date (Optional)</label>
+          <div class="input-with-buttons">
+            <input type="date" id="input-date" />
+            <button type="button" id="btn-date-today" class="btn btn-small btn-secondary">Today</button>
+            <button type="button" id="btn-date-clear" class="btn btn-small btn-ghost">Clear</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="input-recipient-name">Recipient Name</label>
+            <input type="text" id="input-recipient-name" placeholder="e.g., Mr. Juan Dela Cruz" />
+          </div>
+          <div class="form-group">
+            <label for="input-position">Position</label>
+            <input type="text" id="input-position" placeholder="e.g., School Principal" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="input-school-name">School Name</label>
+          <input type="text" id="input-school-name" placeholder="e.g., Imus National High School" />
+        </div>
+
+        <div class="form-group">
+          <label for="input-school-address">School Address</label>
+          <textarea id="input-school-address" rows="2" placeholder="e.g., Bucandala III, Imus, Cavite"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-dear">Salutation Name ("Dear [Name],")</label>
+          <input type="text" id="input-dear" placeholder="e.g., Mr. Dela Cruz (defaults to Sir/Madam if empty)" />
+        </div>
+
+        <!-- SAVED SCHOOLS LIST -->
+        <div class="saved-schools-container">
+          <h3>Saved Schools (<span id="saved-count">0</span>)</h3>
+          <ul id="saved-schools-list" class="saved-schools-list">
+            <li class="empty-state">No saved schools yet. Fill in details above and click "Save This School".</li>
+          </ul>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <!-- SECTION 2: LETTER CONTENT -->
+      <section class="editor-section">
+        <div class="section-header">
+          <h2>2. Letter Content</h2>
+          <button type="button" id="btn-reset-content" class="btn btn-small btn-danger-ghost">Reset Content to Default</button>
+        </div>
+        <p class="helper-text">Use <code>{{school}}</code> anywhere below to automatically insert the School Name.</p>
+
+        <div class="form-group">
+          <label for="input-subject">Subject Line</label>
+          <input type="text" id="input-subject" />
+        </div>
+
+        <div class="form-group">
+          <label for="input-intro">Intro Paragraph</label>
+          <textarea id="input-intro" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-about">About Me</label>
+          <textarea id="input-about" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-services">Services Offered (One bullet per line)</label>
+          <textarea id="input-services" rows="8"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-why">Why Work With Me (One bullet per line; text before ":" becomes bold)</label>
+          <textarea id="input-why" rows="6"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-terms">Proposed Terms (One bullet per line)</label>
+          <textarea id="input-terms" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-next-step">Next Step</label>
+          <textarea id="input-next-step" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-closing">Closing Line</label>
+          <textarea id="input-closing" rows="2"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="input-signature">Signature Block</label>
+          <textarea id="input-signature" rows="7"></textarea>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- RIGHT PANEL: LIVE PREVIEW -->
+    <section id="preview-panel" class="preview-panel" aria-label="Letter Preview">
+      <div id="letter-page" class="letter-page">
+        <!-- Rendered dynamically via script.js -->
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast no-print" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
